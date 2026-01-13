@@ -1,0 +1,17 @@
+# using normal pip without using uv
+
+# base image  we are building on
+FROM python:3.13.11-slim
+
+# set up image by installing needed dependencies
+RUN pip install pandas pyarrow
+
+# set up a working directory inside the container
+WORKDIR /app
+# copy the script to the container. 1st is source. 2nd is destination (what it should be in container)
+COPY pipeline.py pipeline.py
+
+# define what to do first when container runs
+# we just run script here
+# we break each part of command into tokens
+ENTRYPOINT ['python', 'pipeline.py']
