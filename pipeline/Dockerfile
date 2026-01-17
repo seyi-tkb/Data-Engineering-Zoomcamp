@@ -18,10 +18,11 @@ RUN uv sync --locked
 
 
 # copy the script to the container. 1st is source. 2nd is destination (what it should be in container)
-COPY pipeline.py .
+COPY ingest_zone.py taxi_zone_lookup.csv .
 
 # define what to do first when container runs
 # we just run script here
 # we break each part of command into tokens
-ENTRYPOINT ["python", "pipeline.py"] 
+ENTRYPOINT ["python", "ingest_zone.py"] 
 # using single quote above gives error
+

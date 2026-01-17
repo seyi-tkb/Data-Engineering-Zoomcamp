@@ -1,0 +1,43 @@
+# commented out becasue they aren't necessary for a rreason or the other
+# check notes for specifics
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ny_taxi
+    ports:
+      - "5432:5432"
+    volumes:
+      - ny_taxi_data:/var/lib/postgresql      # no (/data) for postgres:18
+    # networks:
+      # - pg_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8085:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    # networks:
+      # - pg_network
+    depends_on:
+      - postgres
+
+# networks:
+  # pg_network:
+    # driver: bridge
+
+volumes:
+  ny_taxi_data:
+  pgadmin_data:

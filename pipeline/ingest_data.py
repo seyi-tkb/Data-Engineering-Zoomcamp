@@ -5,7 +5,7 @@
 import pandas as pd
 from sqlalchemy import create_engine    # database connector
 from tqdm.auto import tqdm              # helps monitor progress
-
+import click                            # for cli parameters
 
 # confirm environment pandas is using/imported from.
 # our venv
@@ -53,20 +53,18 @@ parse_dates = ["tpep_pickup_datetime",
 
 # ###### (MONITORED) INGESTION
 
-def run():
-    # to make it parameterizable
-    year = 2021
-    month = 1
-    # database credentials/parameters
-    pg_user = "root"
-    pg_pass = "root"
-    pg_host = "localhost"
-    pg_port = 5432
-    pg_db = "ny_taxi"
-    # other 
-    target_table = "yellow_taxi_data"
-
-
+# parameterizing with click
+@click.command()
+@click.option('--pg_user', default='root', help='PostgreSQL user')
+@click.option('--pg_pass', default='root', help='PostgreSQL password')
+@click.option('--pg_host', default='localhost', help='PostgreSQL host')
+@click.option('--pg_port', default=5432, type=int, help='PostgreSQL port')
+@click.option('--pg_db', default='ny_taxi', help='PostgreSQL database name')
+@click.option('--target_table', default='yellow_taxi_data', help='Target table name')
+@click.option('--year', default=2021, help='Year of the data')
+@click.option('--month', default=1, help='Month of the data')
+def run(pg_user, pg_pass, pg_host, pg_port, pg_db, target_table, year, month):
+    
     # readability
     prefix = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
     url = f'{prefix}/yellow_tripdata_{year}-{month:02d}.csv.gz' # pads month with 0, width - 2 characters
