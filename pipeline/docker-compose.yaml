@@ -1,6 +1,5 @@
 # commented out becasue they aren't necessary for a rreason or the other
 # check notes for specifics
-version: "3.9"
 
 services:
   postgres:
