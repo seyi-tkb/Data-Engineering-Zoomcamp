@@ -6,7 +6,7 @@ tasks:
     type: io.kestra.plugin.core.kv.Set
     key: GCP_PROJECT_ID
     kvType: STRING
-    value: kestra-sandbox # TODO replace with your project id
+    value: terraform-demo-485118 # TODO replace with your project id
 
   - id: gcp_location
     type: io.kestra.plugin.core.kv.Set
@@ -18,7 +18,7 @@ tasks:
     type: io.kestra.plugin.core.kv.Set
     key: GCP_BUCKET_NAME
     kvType: STRING
-    value: your-name-kestra # TODO make sure it's globally unique!
+    value: seyi-kestra-bucket # TODO make sure it's globally unique!
 
   - id: gcp_dataset
     type: io.kestra.plugin.core.kv.Set
@@ -26,3 +26,12 @@ tasks:
     kvType: STRING
     value: zoomcamp
 
+  - id: gcp_service_account
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_CREDS_JSON
+    kvType: JSON
+    # m_creds content HERE!
+      # switch to secrets eventually
+    value: |
+      {
+      }
