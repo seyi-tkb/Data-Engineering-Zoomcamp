@@ -26,3 +26,6 @@ sources:
 
     - name: yellow_tripdata
       description: Raw yellow taxi trip data
+
+    - name: fhv_tripdata
+      description: Raw For-hire vehicle trip data

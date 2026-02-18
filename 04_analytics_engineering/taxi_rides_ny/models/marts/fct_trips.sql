@@ -1,6 +1,7 @@
 {{
   config(
     materialized='incremental',
+    partition_by={"field": "pickup_datetime", "data_type": "timestamp", "granularity": "day"},
     unique_key='trip_id',
     incremental_strategy='merge',
     on_schema_change='append_new_columns'  )
